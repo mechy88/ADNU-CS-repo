@@ -3,8 +3,10 @@ A solution to this problem: https://www.hackerrank.com/challenges/preprocessor-s
 */
 
 /* Enter your macros here */
-#define minimum(int min, int i){}
-#define maximum(){}
+#define toStr ("")
+#define io cin >>
+#define FUNCTION 
+#define INF
 #include <iostream>
 #include <vector>
 using namespace std;
