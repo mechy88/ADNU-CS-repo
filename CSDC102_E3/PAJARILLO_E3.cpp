@@ -30,7 +30,7 @@ public:
     }
 
     void display() const{
-        cout << getName() << " " << getAddress() << " " << getTickets() << endl;
+        cout << getName() << ", " << getAddress() << ", " << getTickets() << endl;
     }
     string getName() const{
         return name;
@@ -89,13 +89,15 @@ int main(){
 }
 
 void add(list<Order>& l){
+    cin.ignore();
     string n, a;
     int num;
     bool found;
     do{
         cout << "Enter Name: ";
-        cin >> n;
+        getline(cin, n);
         found = false;
+
         for(const auto& order : l){
             if(order.getName() == n){
                 found = true;
@@ -105,17 +107,20 @@ void add(list<Order>& l){
     } while(found == true);
     
     cout << "Enter Address: ";
-    cin >> a;
+    getline(cin, a);
     cout << "Enter Number of Tickets: ";
     cin >> num;
-    while(num > 4){
+    while(num > 4 || num < 1 || cin.fail()){
         cout << "Only 4 tickets per person, enter up to 4: ";
+        cin.clear();
+        cin.ignore();
         cin >> num;
     }
     l.push_back(Order(n, a, num));
     cout << "Order Added!\n";
 }
 void cancel(list<Order>& l){
+    cin.ignore();
     string n;
     cout << "Please enter name in Order: ";
     cin >> n;
@@ -132,10 +137,11 @@ void search(list<Order>& l){
     cout << "\t1. Search by Name\n";
     cout << "\t2. Search by Address\n";
     cout << "\t3. Search by Number of Tickets\n";
-
+    
     int command;
     cin >> command;
 
+    cin.ignore();
     string command_parameter;
     switch(command){
         case 2:
@@ -174,7 +180,6 @@ void displayAll(list<Order>& l){
     }
 }
 void save(list<Order>& l){
-
     fstream save;
     save.open("PAJARILLO_E3.bin", ios::out | ios::binary);
     int size = l.size();
